@@ -26,10 +26,9 @@ The test library I am using is TESTBB.
 <br><br>
 
 2. Put some test data into the table.
-<br>
 
     ```
-   insert into testbb.my_test_table values
+    insert into testbb.my_test_table values
         (1, 'This is record 1', 'BBROCK'),
         (2, 'This is record 2', 'AJONES'),
         (2, 'This is record 2', 'AJONES'), 
