@@ -16,7 +16,7 @@ The test library I am using is TESTBB.
 
 1. Create a test table for the demo. 
 
-    ```
+    ```sql
     create table testbb.my_test_table (
         field_1  smallint   not null with default,
         field_2  char(20)   not null with default,
@@ -27,7 +27,7 @@ The test library I am using is TESTBB.
 
 2. Put some test data into the table.
 
-    ```
+    ```sql
     insert into testbb.my_test_table values
         (1, 'This is record 1', 'BBROCK'),
         (2, 'This is record 2', 'AJONES'),
@@ -45,7 +45,7 @@ The test library I am using is TESTBB.
 
 3. View the data using the OLAP specifications.
 
-    ```
+    ```sql
     select row_number() over (partition by field_1 order by field_1) 
         as row_id, field_1, field_2 
       from testbb.my_test_table;
@@ -108,7 +108,7 @@ The test library I am using is TESTBB.
 
 4. Create a new table based on results from above step.
 
-    ```
+    ```sql
     create table testbb.my_test_table_dups as (
           select row_number() over (partition by field_1 order by field_1) 
               as row_id, rrn(testbb.my_test_table) as rrn, field_1, field_2 
@@ -182,7 +182,7 @@ The test library I am using is TESTBB.
 
 5. Identify the duplicates in the original table.
 
-    ```
+    ```sql
      select * from testbb.my_test_table
       where rrn(testbb.my_test_table) in
             (select rrn 
@@ -223,7 +223,7 @@ The test library I am using is TESTBB.
 
 6. Delete the duplicates in the original table.
 
-    ```
+    ```sql
      delete from testbb.my_test_table
       where rrn(testbb.my_test_table) in
             (select rrn 
